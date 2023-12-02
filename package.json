@@ -1,0 +1,38 @@
+{
+    "name": "luanvan",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc --noEmit && vite build",
+        "preview": "vite preview",
+        "start": "vite --open"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.4.2",
+        "@fortawesome/free-brands-svg-icons": "^6.4.2",
+        "@fortawesome/free-regular-svg-icons": "^6.4.2",
+        "@fortawesome/free-solid-svg-icons": "^6.4.2",
+        "@fortawesome/vue-fontawesome": "^3.0.3",
+        "@syncfusion/ej2-vue-schedule": "^22.2.12",
+        "@tensorflow/tfjs": "^4.11.0",
+        "axios": "^1.4.0",
+        "chart": "^0.1.2",
+        "jquery": "^3.7.1",
+        "js-cookie": "^3.0.5",
+        "pinia": "^2.1.6",
+        "pinia-plugin-persistedstate": "^3.1.0",
+        "vue": "^3.3.4",
+        "vue-chartjs": "^5.2.0",
+        "vue-head": "^2.2.0",
+        "vue-horizontal": "^1.0.2",
+        "vue-router": "^4.2.4",
+        "vue-toast": "^3.1.0",
+        "vue-toast-notification": "^3.1.2",
+        "vue3-toastify": "^0.1.14"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.2.3",
+        "vite": "^4.4.6"
+    }
+}
