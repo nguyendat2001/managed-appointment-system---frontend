@@ -140,6 +140,8 @@ import DatasetService from "@/services/dataset.service";
 import ComponentDisease from "./diseaseAndDataset/ComponentDisease.vue";
 import VueHorizontal from "vue-horizontal";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
   components: {
     DiseaseService,
@@ -212,6 +214,9 @@ export default {
       try{
         await DiseaseService.active(id);
         this.getAlldisease()
+        toast.success("kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err)
       }
@@ -220,6 +225,9 @@ export default {
       try{
         await DiseaseService.inactive(id);
         this.getAlldisease()
+        toast.success("ngưng kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err)
       }
@@ -228,7 +236,10 @@ export default {
       try{
         await DiseaseService.delete(id);
         this.getAllDataset();
-        alert("xóa thông tin thành công")
+        // alert("xóa thông tin thành công")
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err);
       }
@@ -259,6 +270,9 @@ export default {
           const result = await DiseaseService.update(this.newDisease.id ,this.newDisease);
         }
         await this.getAlldisease();
+        toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
         this.newDisease = {};
         this.alertDisease = true;
       } catch (err) {
@@ -282,6 +296,9 @@ export default {
         await DiseaseService.delete(id);
         this.refreshList();
         alert("xóa thông tin thành công")
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       } catch (err) {
         console.log(err);
       }

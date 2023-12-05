@@ -535,6 +535,8 @@ import ModelService from "@/services/model.service";
 import HyperparamResultService from "@/services/hyperparamresult.service";
 import CalculationResultService from "@/services/calculationresult.service";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
   components: {
     HyperparamResultService,
@@ -609,7 +611,10 @@ export default {
       try{
         await CalculationService.delete(id);
         this.refreshList()
-        alert("xóa thông tin thành công")
+        // alert("xóa thông tin thành công")
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err);
       }
@@ -618,7 +623,10 @@ export default {
       try{
         await HyperparamService.delete(id);
         this.refreshList()
-        alert("xóa thông tin thành công")
+        // alert("xóa thông tin thành công")
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err);
       }
@@ -627,7 +635,10 @@ export default {
       try{
         await CalculationResultService.delete(id);
         this.refreshList()
-        alert("xóa thông tin thành công")
+        // alert("xóa thông tin thành công")
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err);
       }
@@ -636,7 +647,10 @@ export default {
       try{
         await HyperparamResultService.delete(id);
         this.refreshList()
-        alert("xóa thông tin thành công")
+        // alert("xóa thông tin thành công")
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       }catch(err){
         console.log(err);
       }
@@ -692,6 +706,9 @@ export default {
             }
             this.newCalculationResult = {}
             this.refreshList()
+            toast.success("nhập thông tin thành công", {
+                    autoClose: 1000
+                });
       } catch (err) {
         console.log(err);
       }
@@ -707,6 +724,9 @@ export default {
               // console.log(this.newRoom)
               this.resultDepart = true
             }
+            toast.success("nhập thông tin thành công", {
+                    autoClose: 1000
+                });
             this.newHyperparamResult = {}
             this.refreshList()
       } catch (err) {
@@ -724,6 +744,9 @@ export default {
               // console.log(this.newRoom)
               this.resultDepart = true
             }
+            toast.success("nhập thông tin thành công", {
+                    autoClose: 1000
+                });
             this.newCalculation = {}
             this.refreshList()
       } catch (err) {
@@ -741,6 +764,9 @@ export default {
               // console.log(this.newRoom)
               this.resultDepart = true
             }
+            toast.success("nhập thông tin thành công", {
+                    autoClose: 1000
+                });
             this.newHyperparam = {}
             this.refreshList()
       } catch (err) {

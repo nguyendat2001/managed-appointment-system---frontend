@@ -165,7 +165,8 @@ import AccountService from "@/services/auth.service"
 import DoctorService from "@/services/doctor.service"  
 import DegreeService from "@/services/degree.service"  
 import {useUserStore} from "@/stores/user";
-
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   components: {
@@ -245,6 +246,9 @@ export default {
           
           console.log(this.newDoctor)
           await DoctorService.update(this.id,this.newDoctor);
+          toast.success("cập nhật thông tin thành công", {
+                    autoClose: 1000
+                });
           this.success=true
         }catch(err){
           console.log(err)

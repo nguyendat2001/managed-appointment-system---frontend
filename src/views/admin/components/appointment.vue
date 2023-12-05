@@ -19,7 +19,7 @@
                         <div class="modal-body p-0">
                           <div class="card card-plain">
                             <div class="card-header pb-0 text-left">
-                              <h3 class="font-weight-bolder text-info text-gradient">Thêm/Cập Nhật Đơn thuốc</h3>
+                              <h3 class="font-weight-bolder text-info text-gradient">Thêm/Cập Nhật lịch hẹn</h3>
                               <div v-if="this.resultReser" class="alert alert-success alert-dismissible fade show" role="alert">
                                   <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                                   <span class="alert-text"><strong>Thành Công!</strong>Thông Tin đã được xử lý!</span>
@@ -27,7 +27,7 @@
                                       <span aria-hidden="true">&times;</span>
                                   </button>
                               </div>
-                              <p class="mb-0">Nhập thông tin Đơn thuốc mới</p>
+                              <p class="mb-0">Nhập thông tin lịch hẹn mới</p>
                             </div>
                             <div class="card-body">
                               <form role="form text-left" @submit.prevent="submitAppointment">
@@ -65,7 +65,7 @@
                                     <label>Giờ (Lưu ý: thời gian cho mỗi lịch hẹn là 20p)</label>
                                     <div class="input-group mb-3">
                                       <select class="form-control form-control-sm col-4" v-model="this.newAppointment.worktime">
-                                         <option v-for="item in this.worktimes" :key="item.id" :value="item.id">{{item.time}}</option>
+                                         <option v-for="item in this.worktimes" :key="item.id" :value="item.id">{{ this.standantlize(item.time) }} - {{ this.addMinutes(item.time) }}</option>
                                       </select>
                                     </div>
                                   </div>
@@ -266,6 +266,8 @@ import UserService from "@/services/user.service";
 import DoctorService from "@/services/doctor.service";
 import VueHorizontal from "vue-horizontal";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     components: {
       AppointmentService,
@@ -337,6 +339,23 @@ export default {
         },
     },
     methods: {
+      standantlize(date) {
+      // console.log(date.split(':'))
+      const data = date.split(":");
+      let time = data[0].toString() + ":" + parseInt(data[1]).toString();
+      return time;
+    },
+    addMinutes(date) {
+      // console.log(date.split(':'))
+      const data = date.split(":");
+      let time = data[0].toString() + ":" + (parseInt(data[1]) + 20).toString();
+      if (parseInt(data[1]) + 20 == 60) {
+        time = (parseInt(data[0]) + 1).toString() + ":" + "00";
+      } else {
+        time = data[0].toString() + ":" + (parseInt(data[1]) + 20).toString();
+      }
+      return time;
+    },
       async getworkday(id){
         try{
           this.workdays = [];
@@ -373,7 +392,10 @@ export default {
           formData.append('file',this.$refs.file1.files[0]);
           await AppointmentService.updateProof(this.appointment.id, formData);
           this.getAllAppointment()
-          alert("cập nhật minh chứng chuyển khoản thành công!")
+          // alert("cập nhật minh chứng chuyển khoản thành công!")
+          toast.success("cập nhật minh chứng chuyển khoản thành công!", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -394,6 +416,9 @@ export default {
           await AppointmentService.active(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -403,6 +428,9 @@ export default {
           await AppointmentService.inactive(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+           toast.success("ngưng kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -428,7 +456,10 @@ export default {
         try{
           await AppointmentService.delete(id);
           this.refreshList()
-          alert("Xóa thông tin thành công")
+          // alert("Xóa thông tin thành công")
+          toast.success("Xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -444,12 +475,14 @@ export default {
           }else{
             const result = await AppointmentService.create(this.newAppointment)
           }
-          
+          toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
           this.newAppointment = {}
           this.listMedicineId = []
           this.resultReser=true
           this.getAllAppointment();
-          this.reFreshMedichine()
+          this.reFreshMedichine();
         }catch(err){
           console.log(err);
         }

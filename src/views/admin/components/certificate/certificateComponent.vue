@@ -143,7 +143,7 @@ export default {
         }
     },
     sendMessage() {
-      this.$emit('submit:c', this.localCertificate);
+      this.$emit('submit:certificate', this.localCertificate);
       // this.tempMessage = '';
     },
 

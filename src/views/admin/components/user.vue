@@ -92,6 +92,8 @@ import UserService from "@/services/User.service";
 import DepartmentService from "@/services/department.service"  
 import VueHorizontal from "vue-horizontal";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     components: {
       UserService,
@@ -149,6 +151,9 @@ export default {
         try{
           await UserService.active(id);
           this.refreshList()
+          toast.success("kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -157,6 +162,9 @@ export default {
         try{
           await UserService.inactive(id);
           this.refreshList()
+          toast.success("ngưng thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }

@@ -394,7 +394,7 @@ export default {
       },
       async getAllCalculation(id) {
         try {
-          console.log("get getAllCalculation");
+          // console.log("get getAllCalculation");
           this.currentcalculation = await CalculationResultService.getallbymodel(id);
         } catch (err) {
           console.log(err);
@@ -428,7 +428,8 @@ export default {
           await ModelService.delete(data.id);
           await ModelFileService.delete(data.name);
           this.getAllModel();
-          alert("xóa model thành công")
+          // alert("xóa model thành công")
+          toast.success("xóa model thành công")
         }catch(err){
           console.log(err)
         }

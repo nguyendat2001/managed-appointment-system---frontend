@@ -380,6 +380,8 @@ import DistrictService from "@/services/district.service";
 import WardService from "@/services/ward.service";
 import WorkdayService from "@/services/workday.service";
 import WorktimeService from "@/services/worktime.service";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
   components: {
     WorkdayService,
@@ -477,6 +479,9 @@ export default {
                 const result = await CertificateService.update(this.newCertificates.id,this.newCertificates);
                 await CertificateService.updatefile(result.id,formData)
             }
+            toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
             this.resultDepart = true
             this.newCertificate = {}
             this.getCertificate();
@@ -488,7 +493,10 @@ export default {
         try {
             await WorkdayService.delete(id);
             this.getworkdays()
-            alert("xóa ngày nhận lịch hẹn thành công")
+            // alert("xóa ngày nhận lịch hẹn thành công")
+            toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
             console.log(err)
         }
@@ -498,6 +506,9 @@ export default {
             console.log(id)
             await CertificateService.delete(id);
             this.getCertificate();
+            toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
             console.log(err)
         }

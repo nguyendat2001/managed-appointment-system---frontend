@@ -193,7 +193,7 @@ export default {
   },
   setup() {
     // Refs
-    toast.success('ngưng kích hoạt thành công', { autoClose: 1000 });
+    // toast.success('ngưng kích hoạt thành công', { autoClose: 1000 });
 
     const resultDepart = ref(false);
     const doctors = ref([]);
@@ -250,7 +250,7 @@ export default {
                     autoClose: 1000
                 });
         getAllDoctor();
-        console.log("chạy xong")
+        // console.log("chạy xong")
       } catch (err) {
         console.log(err);
       }
@@ -306,7 +306,10 @@ export default {
       try {
         await DepartmentService.delete(id);
         getAllDepartment();
-        alert('xóa thông tin phòng ban thành công');
+        // alert('xóa thông tin phòng ban thành công');
+        toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
       } catch (err) {
         console.log(err);
       }

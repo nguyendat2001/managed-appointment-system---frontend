@@ -194,7 +194,9 @@
                   <table class="table align-items-left mb-0">
                     <thead>
                       <tr>
+                        
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên thuốc</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">số lượng</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>
                         <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phòng</th> -->
                         <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thành phần</th>
@@ -206,6 +208,10 @@
                           :key="item.medicine.id">
                         <td>
                           <p class="text-xs font-weight-bold  mt-1 ">{{item.medicine.name}}</p>
+                          <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
+                        </td>
+                        <td>
+                          <p class="text-xs text-center font-weight-bold  mt-1 ">{{item.number}}</p>
                           <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
                         </td>
                         <td>
@@ -249,6 +255,8 @@ import UserService from "@/services/user.service";
 import DoctorService from "@/services/doctor.service";
 import VueHorizontal from "vue-horizontal";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     components: {
       PrescriptionService,
@@ -324,6 +332,9 @@ export default {
           await PrescriptionService.active(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -333,6 +344,9 @@ export default {
           await PrescriptionService.inactive(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("ngưng kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -358,7 +372,10 @@ export default {
         try{
           await PrescriptionService.delete(id);
           this.refreshList()
-          alert("Xóa thông tin thành công")
+          // alert("Xóa thông tin thành công")
+          toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -374,7 +391,9 @@ export default {
           }else{
             const result = await PrescriptionService.create(this.newPrescription)
           }
-          
+          toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
           this.newPrescription = {}
           this.listMedicineId = []
           this.resultReser=true

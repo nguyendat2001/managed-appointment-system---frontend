@@ -262,6 +262,8 @@ import DoctorService from "@/services/doctor.service";
 import VueHorizontal from "vue-horizontal";
 import DiseaseService from "@/services/disease.service";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     components: {
       DiagnosesService,
@@ -334,6 +336,9 @@ export default {
           await DiagnosesService.active(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("kịch hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -343,6 +348,9 @@ export default {
           await DiagnosesService.inactive(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("ngưng kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -359,7 +367,10 @@ export default {
         try{
           await DiagnosesService.delete(id);
           this.getAllDiagnoses();
-          alert("xóa thông tin phiếu chẩn đoán thành công")
+          // alert("xóa thông tin phiếu chẩn đoán thành công")
+          toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -368,6 +379,9 @@ export default {
         try{
           await DiagnosesImageService.delete(id);
           this.getDiagnosesImages(diagnoseId);
+          toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -400,6 +414,9 @@ export default {
               await DiagnosesImageService.uploadFile(result.id,formData);
               this.FormDiagnose = {}
               this.resultReser = true
+              toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
               // this.getAllProducts();
               // console.log(result);
           } catch(err) {
@@ -414,7 +431,9 @@ export default {
           }else{
             const result = await DiagnosesService.create(this.newDiagnoses)
           }
-          
+          toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
           this.newDiagnoses = {}
           this.resultReser=true
           this.getAllDiagnoses();

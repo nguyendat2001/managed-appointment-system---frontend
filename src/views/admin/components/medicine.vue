@@ -217,6 +217,8 @@
 import MedicineService from "@/services/medicine.service";
 import VueHorizontal from "vue-horizontal";
 import FooterComponent from "./footer.vue";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     components: {
       VueHorizontal,
@@ -282,6 +284,9 @@ export default {
           await MedicineService.active(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -291,6 +296,9 @@ export default {
           await MedicineService.inactive(id);
           this.refreshList();
           // alert("xóa thông tin thành công")
+          toast.success("ngưng kích hoạt thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -299,7 +307,10 @@ export default {
         try{
           await MedicineService.delete(id);
           this.refreshList();
-          alert("xóa thông tin thành công")
+          // alert("xóa thông tin thành công")
+          toast.success("xóa thông tin thành công", {
+                    autoClose: 1000
+                });
         }catch(err){
           console.log(err)
         }
@@ -313,7 +324,9 @@ export default {
           }else{
             const result = await MedicineService.create(this.newMedicine)
           }
-          
+          toast.success("thêm thông tin thành công", {
+                    autoClose: 1000
+                });
           this.newMedicine = {}
           this.resultReser=true
           this.refreshList();

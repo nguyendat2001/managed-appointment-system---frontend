@@ -535,6 +535,7 @@ import ModelService from "@/services/model.service";
 import HyperparamResultService from "@/services/hyperparamresult.service";
 import CalculationResultService from "@/services/calculationresult.service";
 import FooterComponent from "./footer.vue";
+
 export default {
   components: {
     HyperparamResultService,

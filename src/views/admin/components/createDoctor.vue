@@ -225,7 +225,8 @@ import AccountService from "@/services/auth.service"
 import DoctorService from "@/services/doctor.service"  
 import DegreeService from "@/services/degree.service"  
 import {useUserStore} from "@/stores/user";
-
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   components: {
@@ -287,7 +288,10 @@ export default {
           console.log(err)
           console.log("err")
           console.log(err.response.data.message)
-          alert(err.response.data.message)
+          // alert(err.response.data.message)
+          toast.error(err.response.data.message, {
+                    autoClose: 3000
+                });
         }
     }
   },

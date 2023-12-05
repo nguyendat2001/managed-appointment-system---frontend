@@ -46,7 +46,7 @@
                     <div class="col-12">
                         <!-- <canvas v-if="this.predicted"  id="canvas1" width={300} height={300}> </canvas> -->
                         <img  v-if="!this.predicted" :width="this.model.inputSize" :height="this.model.inputSize" class="mb-4 rounded" src="@/assets/admin/img/mask.png"/>
-                        <canvas id="canvas1" class="rounded" :width="this.model.inputSize" :height="this.model.inputSize"> </canvas>
+                        <canvas  id="canvas1" class="rounded" :width="this.model.inputSize" :height="this.model.inputSize"> </canvas>
                     </div>
                 </div>
                 <div id="arrowAnim" class="mt-10 col-2" >
@@ -69,7 +69,8 @@
                         <img  v-if="!this.predicted" :width="this.model.inputSize" :height="this.model.inputSize" style="max-width:300px; border-radius:1rem" class="image1" src="@/assets/admin/img/medical.png" alt="User Image" id="display_image">
                         <img  v-else :width="this.model.inputSize" :height="this.model.inputSize" style="max-width:300px; border-radius:1rem" class="image1" :src="this.url" alt="User Image" id="display_image">
 
-                        <canvas class="image1 rounded" id="canvas2" style="position:relative; top:-257px; opacity: 0.3;" :width="this.model.inputSize" :height="this.model.inputSize"> </canvas>
+                        <canvas ref="printcontent" class="image1 rounded" id="canvas2" style="position:relative; top:-257px; opacity: 0.3;" :width="this.model.inputSize" :height="this.model.inputSize"> </canvas>
+                        <button v-if="!this.predicted" class="btn btn-icon btn-3 btn-primary" @click="downloadcanvas" type="">tải</button>
                     </center>
                 </div>
             </div>
@@ -79,7 +80,7 @@
 <script>
 import * as tf from '@tensorflow/tfjs';
 import ModelService from "@/services/model.service"
-import AmountUsedModelService from "@/services/amountUsedModel.service"    
+import AmountUsedModelService from "@/services/amountUsedModel.service"
 
 export default {
     components: {
@@ -105,6 +106,12 @@ export default {
   
     },
     methods: {
+        downloadcanvas(){
+            var link = document.createElement('a');
+            link.download = 'filename.png';
+            link.href = document.getElementById('canvas2').toDataURL()
+            link.click();
+        },
         async predict(){
             const current1 = new Date();
 
